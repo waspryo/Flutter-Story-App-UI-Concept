@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'customIcons.dart';
 
 void main() => runApp(MaterialApp(
   home: MyApp(),
@@ -18,18 +19,33 @@ class _MyAppState extends State<MyApp> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(
-
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 12.0, right: 12.0, top: 30.0, bottom: 8.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      CustomIcons.menu,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                    onPressed: (){},
                   ),
-                )
-              ],
-              )
+                  IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                    onPressed: (){},
+                  )
+                ],
+                ),
+            )
           ],
         ),
       ),
-    )
+    );
   }
 }
