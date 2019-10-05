@@ -153,6 +153,8 @@ class CardScrollWidget extends StatelessWidget {
           var primaryCardLeft = safeWidth - widthOfPrimaryCard;
           var horizontalInset = primaryCardLeft / 2;
 
+          List<Widget> cardList = new List();
+
           for (var i = 0; i < images.length; i++) {
             var delta = i - currentPage;
             bool isOnRight = delta > 0;
@@ -167,18 +169,50 @@ class CardScrollWidget extends StatelessWidget {
               top: padding + verticalInset * max(-delta, 0.0),
               bottom: padding + verticalInset * max(-delta, 0.0),
               start: start,
-              textDirection: TextDirection.ltr,
-              child: Container(
-                child: AspectRatio(
-                  aspectRatio: cardAspectRatio,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: <Widget>[Image.asset(images[i], fit: BoxFit.cover)],
+              textDirection: TextDirection.rtl,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                              child: Container(
+                  decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(3.0, 6.0),
+                        blurRadius: 10.0)
+                  ]),
+                  child: AspectRatio(
+                    aspectRatio: cardAspectRatio,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: <Widget>[
+                        Image.asset(images[i], fit: BoxFit.cover),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
+                                child: Text(title[i],
+                                style: TextStyle(color: Colors.white,
+                                fontSize: 25.0,
+                                fontFamily: "SF-Pro-Text-Regular")),
+                            )
+                          ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             );
+            cardList.add(cardItem);
           }
+          return Stack(
+            children: cardList,
+          );
         },
       ),
     );
